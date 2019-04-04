@@ -4,21 +4,20 @@ import PropTypes from 'prop-types';
 
 const Todo = ({ todo, completeTodo }) => (
   <div
-      className="todo"
-      style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }}
-      key={todo.id}
-    >
-      {todo.text}
-      <div>
-        <button type="button" onClick={() => completeTodo(todo.id)}>Complete</button>
-      </div>
+    className="todo"
+    style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }}
+    key={todo.id}
+  >
+    {todo.text}
+    <div>
+      <button type="button" onClick={() => completeTodo(todo.id)}>Complete</button>
     </div>
+  </div>
 );
 
 // Todo.propTypes = {
-//   todo: PropTypes.string,
-//   index: PropTypes.index,
-//   completeTodo: PropTypes.string,
+//   todo: PropTypes.isRequired,
+//   completeTodo: PropTypes.isRequired,
 // };
 
 const App = () => {
@@ -62,6 +61,7 @@ const App = () => {
       <div className="todo-list">
         {todos.map(todo => (
           <Todo
+            key={todo.id}
             index={todo.id}
             todo={todo}
             completeTodo={completeTodo}
