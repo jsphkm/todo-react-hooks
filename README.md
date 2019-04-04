@@ -97,3 +97,22 @@ TodoForm.propTypes = {
 };
 ```
 
+## Publishing to Github Pages
+Install `gh-pages`
+```sh
+yarn add gh-pages
+```
+
+Modify `package.json`
+```js
+...
+"homepage": "https://github.com/jsphkm/todo-react-hooks",
+...
+"scripts": {
+  "start": "webpack-dev-server --mode development --open",
+  "build": "webpack --mode production",
+  "predeploy": "yarn build",
+  "deploy": "gh-pages -d dist"
+},
+```
+> Note: In the `deploy` script, `dist` has been specified as the directory to deploy from, refer to the [gh-pages documentation](https://www.npmjs.com/package/gh-pages#command-line-utility).
