@@ -2,25 +2,23 @@ import React from 'react';
 import './styles.css';
 import PropTypes from 'prop-types';
 
-const Todo = ({ todo, index, completeTodo }) => {
-  return (
-    <div
+const Todo = ({ todo, completeTodo }) => (
+  <div
       className="todo"
       style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }}
-      key={index}
+      key={todo.id}
     >
       {todo.text}
       <div>
-        <button type="button" onClick={() => completeTodo(index)}>Complete</button>
+        <button type="button" onClick={() => completeTodo(todo.id)}>Complete</button>
       </div>
     </div>
-  );
-};
+);
 
 // Todo.propTypes = {
-//   todo: PropTypes.isRequired,
-//   index: PropTypes.isRequired,
-//   completeTodo: PropTypes.isRequired,
+//   todo: PropTypes.string,
+//   index: PropTypes.index,
+//   completeTodo: PropTypes.string,
 // };
 
 const App = () => {
@@ -28,34 +26,43 @@ const App = () => {
     {
       text: 'Learn about React',
       isCompleted: false,
+      id: 8928947,
     },
     {
       text: 'Meet friend for lunch',
       isCompleted: false,
+      id: 357893503,
     },
     {
       text: 'Build really cool todo app',
       isCompleted: false,
+      id: 9848943935,
     },
   ]);
 
   const addTodo = (text) => {
-    const newTodos = [...todos, { text }];
+    const randNum = Math.floor(Math.random() * 1000000);
+    const newTodos = [...todos, { text, isCompleted: false, id: randNum }];
     setTodos(newTodos);
   };
 
-  const completeTodo = (index) => {
+  const completeTodo = (idx) => {
     const newTodos = [...todos];
-    newTodos[index].isCompleted = true;
-    React.setTodos(newTodos);
+    for (let i = 0; i < newTodos.length; i += 1) {
+      if (newTodos[i].id === idx) {
+        newTodos[i].isCompleted = !newTodos[i].isCompleted;
+        break;
+      }
+    }
+    setTodos(newTodos);
   };
 
   return (
     <div className="app">
       <div className="todo-list">
-        {todos.map((todo, index) => (
+        {todos.map(todo => (
           <Todo
-            index={index}
+            index={todo.id}
             todo={todo}
             completeTodo={completeTodo}
           />
