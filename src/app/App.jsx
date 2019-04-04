@@ -15,10 +15,19 @@ const Todo = ({ todo, completeTodo }) => (
   </div>
 );
 
-// Todo.propTypes = {
-//   todo: PropTypes.isRequired,
-//   completeTodo: PropTypes.isRequired,
-// };
+Todo.propTypes = {
+  todo: PropTypes.shape({
+    text: PropTypes.string,
+    isCompleted: PropTypes.bool,
+    id: PropTypes.number,
+  }),
+  completeTodo: PropTypes.func,
+};
+
+Todo.defaultProps = {
+  todo: { text: '', isCompleted: false, id: 0 },
+  completeTodo: () => null,
+};
 
 const App = () => {
   const [todos, setTodos] = React.useState([
