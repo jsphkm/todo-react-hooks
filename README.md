@@ -1,6 +1,6 @@
 # Todo app with React State Hooks
+I've wrote down some of the problems I came across while working on this [tutorial](https://scotch.io/tutorials/build-a-react-to-do-app-with-react-hooks-no-class-components)
 
-# Issues
 ## Unique ID
 Prevent usage of array index in keys, refer to the [eslint documentation](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md)
 
