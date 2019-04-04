@@ -2,7 +2,26 @@ import React from 'react';
 import './styles.css';
 import PropTypes from 'prop-types';
 
-const Todo = ({ todo }) => <div className="todo">{todo.text}</div>;
+const Todo = ({ todo, index, completeTodo }) => {
+  return (
+    <div
+      className="todo"
+      style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }}
+      key={index}
+    >
+      {todo.text}
+      <div>
+        <button type="button" onClick={() => completeTodo(index)}>Complete</button>
+      </div>
+    </div>
+  );
+};
+
+// Todo.propTypes = {
+//   todo: PropTypes.isRequired,
+//   index: PropTypes.isRequired,
+//   completeTodo: PropTypes.isRequired,
+// };
 
 const App = () => {
   const [todos, setTodos] = React.useState([
@@ -25,14 +44,20 @@ const App = () => {
     setTodos(newTodos);
   };
 
+  const completeTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].isCompleted = true;
+    React.setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <div className="todo-list">
-        {todos.map(todo => (
+        {todos.map((todo, index) => (
           <Todo
-            key={todo.id}
-            index={todo.id}
+            index={index}
             todo={todo}
+            completeTodo={completeTodo}
           />
         ))}
         <TodoForm addTodo={addTodo} />
@@ -63,12 +88,8 @@ const TodoForm = ({ addTodo }) => {
   );
 };
 
-TodoForm.propTypes = {
-  addTodo: PropTypes.string.isRequired,
-};
-
-Todo.propTypes = {
-  todo: PropTypes.string.isRequired,
-};
+// TodoForm.propTypes = {
+//   addTodo: PropTypes.isRequired,
+// };
 
 export default App;
