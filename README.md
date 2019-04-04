@@ -1,5 +1,5 @@
 # Todo app with React State Hooks
-I've wrote down some of the problems I came across while working on this [tutorial](https://scotch.io/tutorials/build-a-react-to-do-app-with-react-hooks-no-class-components)
+Here are some of the problems I came across while working on this [todo app tutorial](https://scotch.io/tutorials/build-a-react-to-do-app-with-react-hooks-no-class-components)
 
 ## Unique ID
 Prevent usage of array index in keys, refer to the [eslint documentation](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md)
@@ -116,3 +116,4 @@ Modify `package.json`
 },
 ```
 > Note: In the `deploy` script, `dist` has been specified as the directory to deploy from, refer to the [gh-pages documentation](https://www.npmjs.com/package/gh-pages#command-line-utility).
+
