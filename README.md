@@ -72,7 +72,7 @@ const App = () => {
 
 ## Enforce PropTypes and [defaultProps](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-default-props.md)
 
-Enforce defaultProps when not a required prop
+Enforce defaultProps when the prop is not required
 ```js
 Todo.defaultProps = {
   todo: { text: '', isCompleted: false, id: 0 },
