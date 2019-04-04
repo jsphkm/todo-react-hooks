@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 import PropTypes from 'prop-types';
 
-const Todo = ({ todo, completeTodo }) => (
+const Todo = ({ todo, completeTodo, removeTodo }) => (
   <div
     className="todo"
     style={{ textDecoration: todo.isCompleted ? 'line-through' : '' }}
@@ -11,6 +11,7 @@ const Todo = ({ todo, completeTodo }) => (
     {todo.text}
     <div>
       <button type="button" onClick={() => completeTodo(todo.id)}>Complete</button>
+      <button type="button" onClick={() => removeTodo(todo.id)}>x</button>
     </div>
   </div>
 );
@@ -22,11 +23,13 @@ Todo.propTypes = {
     id: PropTypes.number,
   }),
   completeTodo: PropTypes.func,
+  removeTodo: PropTypes.func,
 };
 
 Todo.defaultProps = {
   todo: { text: '', isCompleted: false, id: 0 },
   completeTodo: () => null,
+  removeTodo: () => null,
 };
 
 const App = () => {
@@ -42,7 +45,7 @@ const App = () => {
       id: 357893503,
     },
     {
-      text: 'Build really cool todo app',
+      text: 'Build a todo app',
       isCompleted: false,
       id: 9848943935,
     },
@@ -65,6 +68,18 @@ const App = () => {
     setTodos(newTodos);
   };
 
+  const removeTodo = (idx) => {
+    const newTodos = [...todos];
+    let spliceIdx;
+    for (let i = 0; i < newTodos.length; i += 1) {
+      if (newTodos[i].id === idx) {
+        spliceIdx = i;
+      }
+    }
+    newTodos.splice(spliceIdx, 1);
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <div className="todo-list">
@@ -74,6 +89,7 @@ const App = () => {
             index={todo.id}
             todo={todo}
             completeTodo={completeTodo}
+            removeTodo={removeTodo}
           />
         ))}
         <TodoForm addTodo={addTodo} />
@@ -104,8 +120,8 @@ const TodoForm = ({ addTodo }) => {
   );
 };
 
-// TodoForm.propTypes = {
-//   addTodo: PropTypes.isRequired,
-// };
+TodoForm.propTypes = {
+  addTodo: PropTypes.func.isRequired,
+};
 
 export default App;
